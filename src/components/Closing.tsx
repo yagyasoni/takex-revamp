@@ -93,9 +93,9 @@ export default function Closing() {
       place(letters[i], "after");
       playKey();
       if (soundEnabled() && !soundBlocked()) heard = true;
-      // One sound per visible letter, at a person's pace: a beat between words, a longer one after a stop.
-      const pause = /[.,]/.test(letters[i].textContent ?? "") ? 260 : wordEnd ? 60 : 0;
-      timer = window.setTimeout(() => type(line, i + 1), 100 + Math.random() * 45 + pause);
+      // One sound per visible letter, at a natural pace: a beat between words, a longer one after a stop.
+      const pause = /[.,]/.test(letters[i].textContent ?? "") ? 200 : wordEnd ? 50 : 0;
+      timer = window.setTimeout(() => type(line, i + 1), 82 + Math.random() * 34 + pause);
     };
 
     const begin = () => {

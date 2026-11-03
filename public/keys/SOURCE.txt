@@ -1,8 +1,1 @@
-Real keystrokes from "Keyboard Soundpack 1 - Typing and Single Keystrokes" by unicaegames on OpenGameArt,
-released CC0 (public domain): https://opengameart.org/content/keyboard-soundpack-1-typing-and-single-keystrokes
-Recorded on a Cherry KC 1000 office keyboard with a Shure SM7B, per the pack's readme.
-
-office/key-01..16.wav are the pack's keypress-001..016.wav (as also shipped unchanged in
-https://github.com/zordhalo/clatterbox, src-tauri/resources/packs/classic), prepared for playback:
-leading silence removed so the strike lands the instant a letter appears, decay kept, each strike
-brought to the same peak level. Mono 16-bit 44.1 kHz. Licence note in LICENSE.txt.
+Keystrokes cut from a recording on BigSoundBank (bigsoundbank.com), licensed CC0.
