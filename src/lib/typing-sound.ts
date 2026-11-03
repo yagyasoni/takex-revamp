@@ -70,11 +70,11 @@ function strikeAt(buffer: AudioBuffer) {
   return Math.max(0, first / buffer.sampleRate - 0.001);
 }
 
-/** Plays one recorded keystroke, never the same one twice in a row, with a little natural variation. */
+/** Plays one recorded keystroke, never the same one twice in a row, with a little natural variation. True when one actually sounded. */
 export function playKey() {
-  if (!soundEnabled()) return;
+  if (!soundEnabled()) return false;
   unlockSound();
-  if (!ctx || ctx.state !== "running" || !keys.length) return;
+  if (!ctx || ctx.state !== "running" || !keys.length) return false;
   let pick = Math.floor(Math.random() * keys.length);
   if (pick === lastKey) pick = (pick + 1) % keys.length;
   lastKey = pick;
@@ -91,4 +91,5 @@ export function playKey() {
   gain.gain.setTargetAtTime(0, at + 0.03, 0.01);
   source.connect(gain).connect(output!);
   source.start(at, strike, PRESS_SECONDS);
+  return true;
 }

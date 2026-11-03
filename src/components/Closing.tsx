@@ -91,8 +91,7 @@ export default function Closing() {
       const wordEnd = letters[i].nextSibling?.nodeType !== Node.ELEMENT_NODE;
       letters[i].style.visibility = "visible";
       place(letters[i], "after");
-      playKey();
-      if (soundEnabled() && !soundBlocked()) heard = true;
+      if (playKey()) heard = true;
       // One sound per visible letter, at a natural pace: a beat between words, a longer one after a stop.
       const pause = /[.,]/.test(letters[i].textContent ?? "") ? 200 : wordEnd ? 50 : 0;
       timer = window.setTimeout(() => type(line, i + 1), 82 + Math.random() * 34 + pause);
@@ -133,17 +132,22 @@ export default function Closing() {
     window.addEventListener("scroll", check, { passive: true });
     check();
 
-    // Browsers hold audio back until the first click, tap or key press.
+    // Browsers hold audio back until the first click, tap or key press. On a desktop the site sits in a
+    // phone-shaped frame, so a click on the page around the frame counts too.
     const unlock = () => {
       if (soundEnabled()) unlockSound();
     };
     const gestures = ["pointerdown", "pointerup", "click", "touchend", "keydown"];
-    gestures.forEach((g) => window.addEventListener(g, unlock));
+    const targets: Window[] = [window];
+    try {
+      if (window.top && window.top !== window) targets.push(window.top);
+    } catch {}
+    targets.forEach((t) => gestures.forEach((g) => t.addEventListener(g, unlock)));
     return () => {
       stop();
       window.removeEventListener(SOUND_STATE, onSoundState);
       window.removeEventListener("scroll", check);
-      gestures.forEach((g) => window.removeEventListener(g, unlock));
+      targets.forEach((t) => gestures.forEach((g) => t.removeEventListener(g, unlock)));
     };
   }, []);
 

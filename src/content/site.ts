@@ -4,6 +4,9 @@ const live = "https://www.takex.ai";
 export const links = {
   start: `${live}/`,
   investors: `${live}/investors`,
+  // Set these two to the real pages when known.
+  linkedin: "https://www.linkedin.com/company/takex",
+  sampleReport: `${live}/sample-report`,
 };
 
 export const nav = [
@@ -11,6 +14,14 @@ export const nav = [
   { label: "Investors", href: links.investors },
   { label: "Pricing", href: `${live}/pricing` },
   { label: "Insights", href: `${live}/insights` },
+];
+
+// The footer's second row, continuing the four above.
+export const navMore = [
+  { label: "About", href: `${live}/about` },
+  { label: "Contact", href: `${live}/contact` },
+  { label: "Connect", href: links.linkedin, external: true, title: "Connect on LinkedIn" },
+  { label: "Report", href: links.sampleReport },
 ];
 
 // The sample certificate shown on takex.ai.

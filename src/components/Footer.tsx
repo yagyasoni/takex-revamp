@@ -1,4 +1,4 @@
-import { links, nav } from "@/content/site";
+import { links, nav, navMore } from "@/content/site";
 import { Button, Wordmark } from "./ui";
 
 export default function Footer() {
@@ -11,12 +11,24 @@ export default function Footer() {
         <Button href={links.start} variant="solid">
           Start free
         </Button>
+        {/* Two rows of four, each link starting on the same line as the one above it. */}
         <div className="foot-links p-m">
           {nav.map((n) => (
             <a key={n.label} href={n.href} target="_top">
               {n.label}
             </a>
           ))}
+          {navMore.map((n) =>
+            n.external ? (
+              <a key={n.label} href={n.href} target="_blank" rel="noreferrer" title={n.title}>
+                {n.label}
+              </a>
+            ) : (
+              <a key={n.label} href={n.href} target="_top">
+                {n.label}
+              </a>
+            ),
+          )}
         </div>
       </div>
       <Wordmark />
