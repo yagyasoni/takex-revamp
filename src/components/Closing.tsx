@@ -73,7 +73,7 @@ export default function Closing() {
     let timer = 0;
     let running = false;
     let startedSilent = false;
-    let arrivals = 0;
+    let heard = false;
     const stop = () => {
       window.clearTimeout(timer);
       running = false;
@@ -92,9 +92,10 @@ export default function Closing() {
       letters[i].style.visibility = "visible";
       place(letters[i], "after");
       playKey();
-      // One sound per visible letter, at a natural pace: a beat between words, a longer one after a stop.
-      const pause = /[.,]/.test(letters[i].textContent ?? "") ? 200 : wordEnd ? 50 : 0;
-      timer = window.setTimeout(() => type(line, i + 1), 82 + Math.random() * 34 + pause);
+      if (soundEnabled() && !soundBlocked()) heard = true;
+      // One sound per visible letter, at a person's pace: a beat between words, a longer one after a stop.
+      const pause = /[.,]/.test(letters[i].textContent ?? "") ? 260 : wordEnd ? 60 : 0;
+      timer = window.setTimeout(() => type(line, i + 1), 100 + Math.random() * 45 + pause);
     };
 
     const begin = () => {
@@ -124,9 +125,8 @@ export default function Closing() {
           hide();
         }
       } else if (overlap / r.height >= 0.6 && !running) {
-        // On for the first arrival; off for every arrival after it unless switched back on.
-        arrivals += 1;
-        if (arrivals > 1) setSoundEnabled(false);
+        // On until the typing has actually been heard; off for every arrival after that unless switched back on.
+        if (heard) setSoundEnabled(false);
         begin();
       }
     };

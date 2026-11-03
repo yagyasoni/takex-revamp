@@ -385,12 +385,12 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
 @media (max-width: 991px) {
   .footer { justify-content: flex-start; gap: 0; }
   .footer .h1-home { margin-top: auto; }
-  .footer .foot-row { padding-top: 1.5rem; }
+  .footer .foot-row { padding-top: 1.5rem; gap: 3rem; padding-bottom: 2rem; }
   .footer .wordmark { margin-top: auto; }
 }
-/* Steps: compact rows at the bottom of the screen, with open space below the heading. */
+/* Steps: compact rows in the lower part of the screen, with open space below the heading and a clear margin under the rows. */
 @media (max-width: 991px) {
-  .band.spread:has(> .steps) { justify-content: flex-end; gap: 0; }
+  .band.spread:has(> .steps) { justify-content: flex-end; gap: 0; padding-bottom: 8dvh; }
   .band.spread > .steps { flex: none; margin-top: 15.4dvh; grid-auto-rows: auto; gap: 1.25rem; }
   .steps .step { gap: 1rem; }
   .steps .proto { flex: none; width: 6.5rem; height: 6.5rem; aspect-ratio: auto; align-self: auto; }
